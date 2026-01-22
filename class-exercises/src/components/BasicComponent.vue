@@ -1,0 +1,15 @@
+<script setup>
+import { ref } from "vue";
+let count = ref(0);
+</script>
+
+<template>
+  <div>
+    <h1>Count is: {{ count }}</h1>
+    <button @click="count++">Increment</button>
+  </div>
+</template>
+
+<style scoped>
+/* styling goes here */
+</style>
