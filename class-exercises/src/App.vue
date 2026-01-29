@@ -20,4 +20,5 @@ import BasicComponent from './components/BasicComponent.vue';
   <BasicComponent />
 </template>
 
+
 <style scoped></style>

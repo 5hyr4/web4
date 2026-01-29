@@ -1,4 +1,5 @@
 <script setup>
+
 import { ref } from "vue";
 let count = ref(0);
 </script>
@@ -6,10 +7,18 @@ let count = ref(0);
 <template>
   <div>
     <h1>Count is: {{ count }}</h1>
-    <button @click="count--">Increment</button>
+    <button @click="count--">Decrement</button>
   </div>
 </template>
 
 <style scoped>
-/* styling goes here */
+div {
+  color: mediumslateblue;
+}
+
+button {
+  color: rgb(255, 255, 255);
+  background-color: tomato;
+  width: 100px;
+}
 </style>
