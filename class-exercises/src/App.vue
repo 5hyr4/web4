@@ -1,5 +1,6 @@
 <script setup>
 import BasicComponent from './components/BasicComponent.vue';
+import BasicReactivity from './components/BasicReactivity.vue';
 </script>
 
 <template>
@@ -8,6 +9,9 @@ import BasicComponent from './components/BasicComponent.vue';
     Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
     documentation
   </p>
+
+  <BasicReactivity></BasicReactivity>
+
   <BasicComponent />
   <BasicComponent />
   <BasicComponent />
