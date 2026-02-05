@@ -22,6 +22,22 @@ const textList = ref([
 
 ]);
 
+
+const Url = ref("https://sandbox.582multi.media/")
+
+const ImageUrl = ref("https://cdn.shopify.com/s/files/1/0578/3820/7151/files/trees-tree-a-tree-define-tree.jpg?v=1742773820")
+
+const isFirst = ref(true);
+
+const secondUrl = "https://vuejs.org/";
+const secondImageUrl = "https://wallpapercave.com/wp/f65vJAG.jpg";
+
+const toggleLinkImage = () => {
+  isFirst.value = !isFirst.value;
+};
+
+
+
 </script>
 
 <template>
@@ -50,6 +66,28 @@ const textList = ref([
         </li>
     </ul>
 </div>
+
+<div>
+  <img
+    :src="isFirst ? ImageUrl : secondImageUrl"
+    alt="Toggle Image"
+    width="300"
+  />
+
+  <p>
+    <a
+      :href="isFirst ? Url : secondUrl"
+      target="_blank"
+    >
+      Click here!
+    </a>
+  </p>
+
+  <button @click="toggleLinkImage">
+    Toggle image & link
+  </button>
+</div>
+
 
 </template>
 

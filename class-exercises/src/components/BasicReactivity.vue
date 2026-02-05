@@ -60,7 +60,7 @@ const setNumber = (newNumber) => {
 <p>{{ sampleHtml }}</p>
 <section v-html="sampleHtml"></section>
 
-<button @click="toogleBoolean">Toggle Boolean</button>
+<button @click="togleBoolean">Toggle Boolean</button>
 
 <p>Boolean: {{ sampleBoolean }}</p>
 
