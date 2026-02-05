@@ -16,12 +16,7 @@ import BasicReactivity from './components/BasicReactivity.vue';
   <BasicComponent />
   <BasicComponent />
   <BasicComponent />
-  <BasicComponent />
-  <BasicComponent />
-  <BasicComponent />
-  <BasicComponent />
-  <BasicComponent />
-  <BasicComponent />
+
 </template>
 
 

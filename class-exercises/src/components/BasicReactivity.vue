@@ -28,13 +28,37 @@ const sampleNonZeroConversion = ref(!!42)
 const sampleEmptyStringConversion = ref(!!"")
 const sampleNonEmptyStringConversion = ref(!!"Hello")
 
-const toogleBoolean = () => {
+const togleBoolean = () => {
   sampleBoolean.value = !sampleBoolean.value
 }
 const setNumber = (newNumber) => {
   basicInteger.value = newNumber
 }
 
+const arraySample = ref([111, 51, 28, 271, 85, 96, 47, 78, 91, 233, 82])
+
+const fruits = ref(['Apple', 'Banana', 'Cherry'])
+const sampleObject = ref({
+  name: 'John Doe',
+  age: 30,
+  occupation: 'Developer',
+  isStudent: true
+  
+})
+
+const tasks = ref([
+  { id: 1, text: 'Brew Coffee', completed: true },
+  { id: 2, text: 'Make Breakfast', completed: true },
+  { id: 3, text: 'Read News', completed: false }
+])
+
+const toggleTask = (task) => {
+  task.completed = !task.completed
+}
+
+const removeTask = (task) => {
+  tasks.value = tasks.value.filter(t => t.id !== task.id)
+}
 </script>
 
 
@@ -81,6 +105,62 @@ const setNumber = (newNumber) => {
 <p>Empty String Conversion: {{ sampleEmptyStringConversion }}</p>
 <p>Non Empty String Conversion: {{ sampleNonEmptyStringConversion }}</p>
 
+<p>{{ arraySample[0]}}</p>
+<p>{{ arraySample.length }}</p>
 
+<p>
+  <span v-for="n in 10" :key="n">{{ n }}</span>
+</p>
+<p>
+  <span v-for="n in arraySample.length" :key="n">{{ arraySample[n - 1]}}</span>
+</p>
+
+<p>
+  <span v-for="num in arraySample" :key="num" @click="$event.target.value">{{ num }}</span>
+</p>
+
+<ul>
+  <li v-for="item in arraySample" :key="item">{{ item }}</li>
+</ul>
+
+<ul>
+  <li v-for="fruit in fruits" :key="fruit">{{ fruit }}</li>
+</ul>
+
+<ul>
+  <li v-for="digit in basicInteger" :key="digit">{{ digit }}</li>
+</ul>
+
+<ul>
+  <li v-for="char in sampleDqText" :key="char">{{ char }}</li>
+</ul>
+
+<p>{{ sampleObject }}</p>
+
+<section v-if="sampleObject">
+  <p>Name: {{ sampleObject.name }}</p>
+  <p>Age: {{ sampleObject.age }}</p>
+  <p>Occupation: {{ sampleObject.occupation }}</p>
+  <p>Student status: {{ sampleObject.isStudent }}</p>
+</section>
+
+<ul>
+  <li v-for="task in tasks" :key="task.id">
+    <span>{{ task.id }}</span>
+    <span :class="{ 'is-done': task.completed }">{{ task.text }}</span>
+    <button @click="toggleTask(task)">Check</button>
+    <button @click="removeTask(task)">Delete</button>
+  </li>
+</ul>
 
 </template>
+
+<style scoped>
+span {
+  margin-right: 0.25rem;
+}
+
+.is-done {
+  text-decoration: line-through;
+}
+</style>
