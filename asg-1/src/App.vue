@@ -1,5 +1,10 @@
 <script setup>
-import BasicComponent from './components/BasicComponent.vue';
+import TextComponent from './components/TextComponent.vue';
+import CountComponent from './components/CountComponent.vue';
+import ListComponent from './components/ListComponent.vue';
+import LinkImageComponent from './components/LinkImageComponent.vue';
+import ObjectComponent from './components/ObjectComponent.vue';
+
 </script>
 
 <template>
@@ -10,6 +15,11 @@ import BasicComponent from './components/BasicComponent.vue';
   </p>
 
   <BasicComponent />
+  <CountComponent />  
+  <TextComponent />
+  <ListComponent />
+  <LinkImageComponent />
+  <ObjectComponent />
 </template>
 
 
