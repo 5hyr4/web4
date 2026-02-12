@@ -89,8 +89,9 @@ const toggleRead = (book) => {
 
 <style scoped>
 .book-info {
-  border: 1px solid #ccc;
-  background-color: #bdc8ff;
+  border: 1px solid #5f5862;
+  background-color: #bdc8ff80;
+  border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1rem;
 }
