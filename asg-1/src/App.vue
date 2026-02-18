@@ -4,6 +4,7 @@ import CountComponent from './components/CountComponent.vue';
 import ListComponent from './components/ListComponent.vue';
 import LinkImageComponent from './components/LinkImageComponent.vue';
 import ObjectComponent from './components/ObjectComponent.vue';
+import BookCard from './components/BookCard.vue';
 
 </script>
 
@@ -20,6 +21,7 @@ import ObjectComponent from './components/ObjectComponent.vue';
   <ListComponent />
   <LinkImageComponent />
   <ObjectComponent />
+  <BookCard />
 </template>
 
 

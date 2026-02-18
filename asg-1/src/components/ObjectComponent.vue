@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import BookCard from "./BookCard.vue";
 
 const book = ref({
   title: "Once Upon a Broken Heart",
@@ -52,38 +53,86 @@ const books = ref([
   }
 ])
 
+const newTitle = ref('')
+const newAuthor = ref('')
+const newYear = ref('')
+const newGenre = ref('')
+const newIsRead = ref(false)
+
+const addBook = () => {
+  if (
+    newTitle.value.trim() === '' ||
+    newAuthor.value.trim() === '' ||
+    newYear.value === '' ||
+    newGenre.value.trim() === ''
+  ) return
+
+  books.value.push({
+    id: Date.now(),
+    title: newTitle.value,
+    author: newAuthor.value,
+    year: newYear.value,
+    genre: newGenre.value,
+    isRead: newIsRead.value
+  })
+
+  newTitle.value = ''
+  newAuthor.value = ''
+  newYear.value = ''
+  newGenre.value = ''
+  newIsRead.value = false
+}
+
 const toggleRead = (book) => {
   book.isRead = !book.isRead
 }
 </script>
 
 <template>
-    <h2>Book Object</h2>
+  <h2>Book Object</h2>
 
-<section v-if="book">
-  <p>Title: {{ book.title }}</p>
-  <p>Author: {{ book.author }}</p>
-  <p>Year: {{ book.year }}</p>
-  <p>Genre: {{ book.genre }}</p>
-  <p>Read: {{ book.isRead }}</p>
-</section>
+  <section v-if="book">
+    <p>Title: {{ book.title }}</p>
+    <p>Author: {{ book.author }}</p>
+    <p>Year: {{ book.year }}</p>
+    <p>Genre: {{ book.genre }}</p>
+    <p>Read: {{ book.isRead }}</p>
+  </section>
 
-<h2>Book Array</h2>
+  <h2>Add a New Book</h2>
 
-<div class="book-info" v-for="item in books" :key="item.id">
-  <h3>{{ item.title }}</h3>
-  <p>Author: {{ item.author }}</p>
-  <p>Year: {{ item.year }}</p>
-  <p>Genre: {{ item.genre }}</p>
+  <input v-model="newTitle" placeholder="Title" />
+  <input v-model="newAuthor" placeholder="Author" />
+  <input 
+  v-model.number="newYear" 
+  type="number" 
+  min="1900" 
+  max="2026"
+  placeholder="Year" 
+/>
 
-  <p :class="{ read: item.isRead }">
-    Read: {{ item.isRead }}
-  </p>
+  <label>
+    <input type="checkbox" v-model="newIsRead" />
+    Read?
+  </label>
 
-  <button @click="toggleRead(item)">
-    Toggle Read
-  </button>
-</div>
+  <button @click="addBook">Add Book</button>
+
+  <h2>Book Array</h2>
+
+  <BookCard
+    v-for="item in books"
+    :key="item.id"
+    :title="item.title"
+    :author="item.author"
+    :year="item.year"
+    :genre="item.genre"
+    :isRead="item.isRead"
+  >
+    <button @click="toggleRead(item)">
+      Toggle Read
+    </button>
+  </BookCard>
 
 </template>
 
@@ -100,5 +149,4 @@ const toggleRead = (book) => {
   color: rgb(31, 33, 196);
   font-weight: bold;
 }
-
 </style>
