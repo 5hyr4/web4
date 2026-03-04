@@ -4,6 +4,7 @@
 import TwoWayBind from './components/TwoWayBind.vue';
 import TaskManager from './components/TaskManager.vue';
 import PropEx from './components/PropEx.vue';
+import LetterBounce from './components/LetterBounce.vue';
 
 </script>
 
@@ -14,6 +15,10 @@ import PropEx from './components/PropEx.vue';
     documentation
   </p>
 
+  <LetterBounce character="H"/>
+  <LetterBounce v-for="character in 'Hello World'" :key="character" :character="character" />
+
+  <img src="./assets/olivcelso-nature-10106842_640" alt="">
   <!-- <BasicReactivity></BasicReactivity>
 
   <BasicComponent />

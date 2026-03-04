@@ -19,6 +19,10 @@ defineProps([
       Read: {{ isRead }}
     </p>
 
+    <button @click="toggleRead(item)">
+      Toggle Read
+    </button>
+
   </div>
 </template>
 
@@ -35,4 +39,6 @@ defineProps([
   color: rgb(31, 33, 196);
   font-weight: bold;
 }
+
+
 </style>

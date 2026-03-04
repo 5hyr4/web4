@@ -101,6 +101,7 @@ const toggleRead = (book) => {
 
   <h2>Add a New Book</h2>
 
+  <section>
   <input v-model="newTitle" placeholder="Title" />
   <input v-model="newAuthor" placeholder="Author" />
   <input 
@@ -108,8 +109,8 @@ const toggleRead = (book) => {
   type="number" 
   min="1900" 
   max="2026"
-  placeholder="Year" 
-/>
+  placeholder="Year" />
+  <input v-model="newGenre" placeholder="Genre" />
 
   <label>
     <input type="checkbox" v-model="newIsRead" />
@@ -117,9 +118,15 @@ const toggleRead = (book) => {
   </label>
 
   <button @click="addBook">Add Book</button>
+  </section>
+
+    <button @click="toggleRead(item)">
+    Toggle Read
+  </button>
 
   <h2>Book Array</h2>
 
+  <section id="book-card">
   <BookCard
     v-for="item in books"
     :key="item.id"
@@ -127,12 +134,12 @@ const toggleRead = (book) => {
     :author="item.author"
     :year="item.year"
     :genre="item.genre"
-    :isRead="item.isRead"
-  >
+    :isRead="item.isRead">
+
     <button @click="toggleRead(item)">
-      Toggle Read
-    </button>
+      Toggle Read</button>
   </BookCard>
+  </section>
 
 </template>
 
@@ -143,6 +150,11 @@ const toggleRead = (book) => {
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1rem;
+}
+
+#book-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .read {
