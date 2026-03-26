@@ -6,6 +6,7 @@ import TaskManager from './components/TaskManager.vue';
 import PropEx from './components/PropEx.vue';
 import LetterBounce from './components/LetterBounce.vue';
 import WpApiBasics from './components/WpApiBasics.vue';
+import WpApiExplore from './components/WpApiExplore.vue';
 
 </script>
 
@@ -34,6 +35,7 @@ import WpApiBasics from './components/WpApiBasics.vue';
   <PropEx text="1" color="blue"/>
   <PropEx text="1" color="yellow"/>
   <WpApiBasics />
+  
 
 </template>
 
