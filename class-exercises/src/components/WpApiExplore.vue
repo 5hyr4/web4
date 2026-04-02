@@ -52,8 +52,6 @@ onMounted(() => {
         <p>{{ post.image }}</p>
         <img :src="post.image" alt="post.name">>
         <p>{{ post.origin.name }}</p>
-
-
       </li>
     </ul>
   </div>

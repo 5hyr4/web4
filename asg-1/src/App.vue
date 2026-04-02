@@ -5,6 +5,7 @@ import ListComponent from './components/ListComponent.vue';
 import LinkImageComponent from './components/LinkImageComponent.vue';
 import ObjectComponent from './components/ObjectComponent.vue';
 import BookCard from './components/BookCard.vue';
+import SampleApi from './components/SampleApi.vue';
 
 </script>
 
@@ -22,6 +23,7 @@ import BookCard from './components/BookCard.vue';
   <LinkImageComponent />
   <ObjectComponent />
   <BookCard />
+  <SampleApi />
 </template>
 
 
