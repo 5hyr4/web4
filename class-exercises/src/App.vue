@@ -7,6 +7,8 @@ import PropEx from './components/PropEx.vue';
 import LetterBounce from './components/LetterBounce.vue';
 import WpApiBasics from './components/WpApiBasics.vue';
 import WpApiExplore from './components/WpApiExplore.vue';
+import FormBasics from './components/FormBasics.vue';
+import FetchBasics from './components/FetchBasics.vue';
 
 </script>
 
@@ -35,6 +37,8 @@ import WpApiExplore from './components/WpApiExplore.vue';
   <PropEx text="1" color="blue"/>
   <PropEx text="1" color="yellow"/>
   <WpApiBasics />
+  <FormBasics />
+  <FetchBasics />
   
 
 </template>
