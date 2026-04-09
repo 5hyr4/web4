@@ -4,10 +4,9 @@ defineProps(["agency"])
 
 <template>
   <section id="agency">
-    <h2>Agency & Event</h2>
+    <h2>Agency</h2>
     <p>Agency: {{ agency.name }}</p>
     <p>Role: {{ agency.role }}</p>
-    <p>Client: {{ agency.client }}</p>
-    <p>Event: {{ agency.event }}</p>
+    <p>{{ agency.description }}</p>
   </section>
 </template>

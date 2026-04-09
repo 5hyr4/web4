@@ -9,9 +9,8 @@ defineProps(["title", "name"])
   </header>
 </template>
 <style scoped>
-
 header {
-    padding: 230px;
+  padding: 200px;
 }
 
 h1 {

@@ -28,29 +28,27 @@ onMounted(() => {
 
 
 <template>
-    <div class="container">
-      <h1>Wines</h1>
-  
-      <div v-if="isLoading" class="loading">
-        Retrieving wines...
-      </div>
-  
-      <div v-else-if="errorMessage" class="error">
-        Error: {{ errorMessage }}
-      </div>
-  
-      <ul v-else>
-        <li v-for="wine in posts" :key="wine.id">
-          <p>{{ wine.winery }}</p>
-          <p>{{ wine.location }}</p>
-          <p>{{ wine.rating.average }}</p>
-          <p>{{ wine.rating.reviews }}</p>
-          <img :src="wine.image" alt="wine.name">>
-          <p>{{ wine.origin.name }}</p>
-  
-  
-        </li>
-      </ul>
+  <div class="container">
+    <h1>Wines</h1>
+
+    <div v-if="isLoading" class="loading">
+      Retrieving wines...
     </div>
-  </template>
+
+    <div v-else-if="errorMessage" class="error">
+      Error: {{ errorMessage }}
+    </div>
+
+    <ul v-else>
+      <li v-for="wine in posts" :key="wine.id">
+        <p>{{ wine.winery }}</p>
+        <p>{{ wine.location }}</p>
+        <p>{{ wine.rating.average }}</p>
+        <p>{{ wine.rating.reviews }}</p>
+
+        <img :src="wine.image" :alt="wine.wine" />
+      </li>
+    </ul>
+  </div>
+</template>
   

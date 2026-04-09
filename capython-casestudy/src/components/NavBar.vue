@@ -19,11 +19,14 @@ defineProps(["links"])
 nav {
   background: #000231;
   padding: 15px;
+  position: sticky;
+
 }
 
 ul {
-  display: flex;
-  gap: 20px;
+  display: grid;
+  text-align: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   list-style: none;
   justify-content: center;
 }

@@ -19,6 +19,19 @@ defineProps(["results"])
 
     </div>
 
+    <!-- 🎬 VIDEO SECTION -->
+<article class="video-section">
+
+<h3>{{ results.video.title }}</h3>
+
+<iframe
+  :src="results.video.url"
+  frameborder="0"
+  allowfullscreen
+></iframe>
+
+</article>
+
   </section>
 </template>
 
@@ -58,5 +71,17 @@ defineProps(["results"])
 img, video {
   width: 100%;
   border-radius: 8px;
+}
+
+.video-section {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.video-section iframe {
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
 }
 </style>

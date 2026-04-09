@@ -1,16 +1,19 @@
 <script setup>
-defineProps(["reflection"])
+defineProps(["capyskill", "reflection"])
 </script>
 
 <template>
   <section id="capyskill">
-    <h2>Capyskill & Reflection</h2>
 
-    <h3>Capyskill: {{ reflection.skill }}</h3>
-    <p>{{ reflection.description }}</p>
+    <h2 class="section-title">Capyskill & Reflection</h2>
 
-    <h3>Personal Reflection</h3>
-    <p>{{ reflection.personal }}</p>
+    <!-- CAPYSKILL -->
+    <h3>{{ capyskill.skill }}</h3>
+    <p>{{ capyskill.description }}</p>
+
+    <!-- REFLECTION -->
+    <h3>Reflection</h3>
+    <p>{{ reflection }}</p>
+
   </section>
 </template>
-
