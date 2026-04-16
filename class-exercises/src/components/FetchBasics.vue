@@ -1,14 +1,14 @@
 <script setup>
 import { ref } from 'vue';
 
-// const reviews = ref([]);
-//const reviewsLoading = ref(true);
+const reviews = ref([]);
+const reviewsLoading = ref(true);
 
-// fetch('https://ngy.582mi.com/web4/api/')
-  // .then(res => res.json())
- // .then(data => reviews.value = data)
-  // .then(() => reviewsLoading.value = false)
-  // .catch(err => console.error('Error:', err)); 
+ fetch('https://ngy.582mi.com/web4/api/')
+   .then(res => res.json())
+  .then(data => reviews.value = data)
+   .then(() => reviewsLoading.value = false)
+   .catch(err => console.error('Error:', err)); 
 
   fetch('https://ngy.582mi.com/web4/api/index.php?type=movie', {
   method: 'POST', // Specify the HTTP method
