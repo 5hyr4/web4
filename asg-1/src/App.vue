@@ -16,14 +16,30 @@ import SampleApi from './components/SampleApi.vue';
     documentation
   </p>
 
-  <BasicComponent />
+  <nav>
+    <router-link to="/basic-component">BasicComponent</router-link>
+    <router-link to="/book-card">BookCard</router-link>
+    <router-link to="/count-component">CountComponent</router-link>
+    <router-link to="/link-image-component">LinkImageComponent</router-link>
+    <router-link to="/list-component">ListComponent</router-link>
+    <router-link to="/object-component">ObjectComponent</router-link>
+    <router-link to="/sample-api">SampleApi</router-link>
+    <router-link to="/text-component">TextComponent</router-link>
+
+
+  </nav>
+
+  <router-view />
+
+
+  <!-- <BasicComponent />
   <CountComponent />  
   <TextComponent />
   <ListComponent />
   <LinkImageComponent />
   <ObjectComponent />
   <BookCard />
-  <SampleApi />
+  <SampleApi /> -->
 </template>
 
 
