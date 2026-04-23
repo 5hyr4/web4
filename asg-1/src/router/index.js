@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import BasicComponent from '@/components/BasicComponent.vue';
-import BookCard from '@/components/BookCard.vue';
 import CountComponent from '@/components/CountComponent.vue';
 import LinkImageComponent from '@/components/LinkImageComponent.vue';
 import ListComponent from '@/components/ListComponent.vue';
+import BookCard from '@/components/BookCard.vue';
 import ObjectComponent from '@/components/ObjectComponent.vue';
-import SampleApi from '@/components/SampleApi.vue';
 import TextComponent from '@/components/TextComponent.vue';
-
+import SampleApi from '@/components/SampleApi.vue';
+import WpHeadlessBasics from '@/components/WpHeadlessBasics.vue';
+import FormBasics from '@/components/FormBasics.vue';
 
 
 
@@ -15,16 +15,7 @@ import TextComponent from '@/components/TextComponent.vue';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: '/basic-component',
-      name: 'BasicComponent',
-      component: BasicComponent,
-    },
-    {
-      path: '/book-card',
-      name: 'BookCard',
-      component: BookCard,
-    },
+
     {
       path: '/count-component',
       name: 'CountComponent',
@@ -41,9 +32,24 @@ const router = createRouter({
       component: ListComponent,
     },
     {
+      path: '/book-card',
+      name: 'BookCard',
+      component: BookCard,
+    },
+    {
       path: '/object-component',
       name: 'ObjectComponent',
       component: ObjectComponent,
+    },
+      {
+      path: '/book-card',
+      name: 'BookCard',
+      component: BookCard,
+    },
+    {
+      path: '/text-component',
+      name: 'TextComponent',
+      component: TextComponent,
     },
     {
       path: '/sample-api',
@@ -51,9 +57,14 @@ const router = createRouter({
       component: SampleApi,
     },
     {
-      path: '/text-component',
-      name: 'TextComponent',
-      component: TextComponent,
+      path: '/wp-headless-basics',
+      name: 'WpHeadlessBasics',
+      component: WpHeadlessBasics,
+    },
+        {
+      path: '/form-basics',
+      name: 'FormBasics',
+      component: FormBasics,
     },
     
 

@@ -7,13 +7,22 @@ import WpApiExplore from '@/components/WpApiExplore.vue';
 import FetchBasics from '@/components/FetchBasics.vue';
 import LettersView from '@/views/LettersView.vue';
 import WpRestView from '@/views/WpRestView.vue';
-import AddReview from '@/components/AddReview.vue'
-import BasicComponent from '@/components/BasicComponent.vue'
-import BasicReactivity from '@/components/BasicReactivity.vue'
-import DatabaseAdmin from '@/components/DatabaseAdmin.vue'
-import PropEx from '@/components/PropEx.vue'
-import TaskManager from '@/components/TaskManager.vue'
-import TwoWayBind from '@/components/TwoWayBind.vue'
+import AddReview from '@/components/AddReview.vue';
+import BasicComponent from '@/components/BasicComponent.vue';
+import BasicReactivity from '@/components/BasicReactivity.vue';
+import DatabaseAdmin from '@/components/DatabaseAdmin.vue';
+import PropEx from '@/components/PropEx.vue';
+import TaskManager from '@/components/TaskManager.vue';
+import TwoWayBind from '@/components/TwoWayBind.vue';
+
+import MovieGallery from '@/views/MovieGallery.vue';
+import AddMovie from '@/views/AddMovie.vue';
+import EditMovie from '@/views/EditMovie.vue';
+import DeleteMovie from '@/views/DeleteMovie.vue';
+
+
+
+
 
 
 
@@ -89,6 +98,27 @@ const router = createRouter({
       path: '/two-way-bind',
       name: 'TwoWayBind',
       component: TwoWayBind,    
+    },
+
+    {
+      path: '/movie-gallery',
+      name: 'MovieGallery',
+      component: MovieGallery,    
+    },
+    {
+      path: '/add-movie',
+      name: 'AddMovie',
+      component: AddMovie,    
+    },
+        {
+      path: '/edit-movie',
+      name: 'EditMovie',
+      component: EditMovie,    
+    },
+    {
+      path: '/delete-movie',
+      name: 'DeleteMovie',
+      component: DeleteMovie,    
     },
   ],
 })

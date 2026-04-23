@@ -17,14 +17,16 @@ import SampleApi from './components/SampleApi.vue';
   </p>
 
   <nav>
-    <router-link to="/basic-component">BasicComponent</router-link>
-    <router-link to="/book-card">BookCard</router-link>
     <router-link to="/count-component">CountComponent</router-link>
     <router-link to="/link-image-component">LinkImageComponent</router-link>
     <router-link to="/list-component">ListComponent</router-link>
+     <router-link to="/book-card">BookCard</router-link>
     <router-link to="/object-component">ObjectComponent</router-link>
-    <router-link to="/sample-api">SampleApi</router-link>
     <router-link to="/text-component">TextComponent</router-link>
+    <router-link to="/sample-api">SampleApi</router-link>
+    <router-link to="/wp-headless-basics">WpHeadlessBasics</router-link>
+    <router-link to="/form-basics">FormBasics</router-link>
+
 
 
   </nav>

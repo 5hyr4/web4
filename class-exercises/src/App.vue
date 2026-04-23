@@ -19,7 +19,7 @@ import MovieRatings from './components/MovieRatings.vue';
   <h1>Demo</h1>
 
   <nav>
-    <router-link to="/">Home</router-link>
+    <!-- <router-link to="/">Home</router-link>
     <router-link to="/wp-api-basics">WpApiBasics</router-link>
     <router-link to="/wp-headless-basics">WpHeadlessBasics</router-link>
     <router-link to="/wp-api-explore">WpApiExplore</router-link>
@@ -32,7 +32,16 @@ import MovieRatings from './components/MovieRatings.vue';
     <router-link to="/database-admin">DatabaseAdmin</router-link>
     <router-link to="/prop-ex">PropEx</router-link>
     <router-link to="/task-manager">TaskManager</router-link>
-    <router-link to="/two-way-bind">TwoWayBind</router-link>
+    <router-link to="/two-way-bind">TwoWayBind</router-link> -->
+
+    <router-link to="/movie-gallery">MovieGallery</router-link>
+    <router-link to="/add-movie">AddMovie</router-link>
+    <router-link to="/edit-movie">EditMovie</router-link>
+    <router-link to="/delete-movie">DeleteMovie</router-link>
+
+
+
+
 
 
     
