@@ -172,6 +172,7 @@ onMounted(fetchMovies);
   line-height: 1.6; 
   display: -webkit-box;
   -webkit-line-clamp: 4;
+  line-clamp: 4;
   -webkit-box-orient: vertical;  
   overflow: hidden;
 }
