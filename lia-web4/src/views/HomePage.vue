@@ -35,8 +35,8 @@ onMounted(fetchRecipes);
 <template>
   <div class="component-container">
     <header class="recipe-header">
-      <h2 class="main-title">Recipe Gallery</h2>
-      <p class="subtitle">Browse the complete collection of titles and synopses.</p>
+      <h2 class="main-title">Home Page</h2>
+      <p class="subtitle">Browse a variety of delicious Recipes.</p>
     </header>
 
     <div v-if="isFetching" class="status-msg">

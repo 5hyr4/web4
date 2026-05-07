@@ -13,7 +13,7 @@ const showSuccessModal = ref(false);
 
 const recipeData = reactive({
   title: '',
-  acf: { description: '', time: '', poster: null }
+  acf: { description: '', ingredients: '', instructions: '', time: '', poster: null }
 });
 
 const fetchRecipeList = async () => {
@@ -27,6 +27,8 @@ const selectRecipe = (recipe) => {
   selectedId.value = recipe.id;
   recipeData.title = recipe.title.rendered;
   recipeData.acf.description = recipe.acf.description?.simple_value_formatted || '';
+  recipeData.acf.ingredients = recipe.acf.ingredients?.simple_value_formatted || '';
+  recipeData.acf.instructions = recipe.acf.instructions?.simple_value_formatted || '';
   recipeData.acf.time = recipe.acf.time?.simple_value_formatted || '';
   recipeData.acf.poster = recipe.acf.poster || null;
 };
@@ -39,7 +41,7 @@ const handleUpdate = async () => {
       headers: { 'Content-Type': 'application/json', 'Authorization': `Basic ${auth}` },
       body: JSON.stringify({
         title: recipeData.title,
-        acf: { description: recipeData.acf.description, time: recipeData.acf.time }
+        acf: { description: recipeData.acf.description, ingredients: recipeData.acf.ingredients, instructions: recipeData.acf.instructions, time: recipeData.acf.time }
       })
     });
     if (res.ok) { showSuccessModal.value = true; await fetchRecipeList(); }
