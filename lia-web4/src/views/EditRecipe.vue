@@ -1,77 +1,79 @@
 <script setup>
 // --- Configuration ---
-const auth = btoa('ngy_56fl8di6:zySp mrVk lPvR IFOx M8PZ tH5b'); // Use your App Password
-const baseUrl = 'https://ngy.582mi.com/headless/wp-json/wp/v2';
+const auth = btoa('h0Cg CzRI HhEb 8Gpl KQkY 4Fiv'); // Use your App Password
+const baseUrl = 'https://shyra70.582helvetica.com/cms/wp-json/wp/v2';
 
 import { ref, reactive, onMounted } from 'vue';
 
-const movieList = ref([]);
+const recipeList = ref([]);
 const fetchingList = ref(true);
 const selectedId = ref(null);
 const isUpdating = ref(false);
 const showSuccessModal = ref(false);
 
-const movieData = reactive({
+const recipeData = reactive({
   title: '',
-  acf: { synopsis: '', year: '', poster: null }
+  acf: { description: '', time: '', poster: null }
 });
 
-const fetchMovieList = async () => {
+const fetchRecipeList = async () => {
   try {
-    const res = await fetch(`${baseUrl}/movies?per_page=50`, { headers: { 'Authorization': `Basic ${auth}` } });
-    movieList.value = await res.json();
+    const res = await fetch(`${baseUrl}/recipe?acf_format=standard`, { headers: { 'Authorization': `Basic ${auth}` } });
+    recipeList.value = await res.json();
   } finally { fetchingList.value = false; }
 };
 
-const selectMovie = (movie) => {
-  selectedId.value = movie.id;
-  movieData.title = movie.title.rendered;
-  movieData.acf.synopsis = movie.acf.synopsis?.simple_value_formatted || '';
-  movieData.acf.year = movie.acf.year?.simple_value_formatted || ''; 
-  movieData.acf.poster = movie.acf.poster || null;
+const selectRecipe = (recipe) => {
+  selectedId.value = recipe.id;
+  recipeData.title = recipe.title.rendered;
+  recipeData.acf.description = recipe.acf.description?.simple_value_formatted || '';
+  recipeData.acf.time = recipe.acf.time?.simple_value_formatted || '';
+  recipeData.acf.poster = recipe.acf.poster || null;
 };
 
 const handleUpdate = async () => {
   isUpdating.value = true;
   try {
-    const res = await fetch(`${baseUrl}/movies/${selectedId.value}`, {
+    const res = await fetch(`${baseUrl}/recipes/${selectedId.value}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Basic ${auth}` },
       body: JSON.stringify({
-        title: movieData.title,
-        acf: { synopsis: movieData.acf.synopsis, year: movieData.acf.year }
+        title: recipeData.title,
+        acf: { description: recipeData.acf.description, time: recipeData.acf.time }
       })
     });
-    if (res.ok) { showSuccessModal.value = true; await fetchMovieList(); }
+    if (res.ok) { showSuccessModal.value = true; await fetchRecipeList(); }
   } finally { isUpdating.value = false; }
 };
 
-onMounted(fetchMovieList);
+onMounted(fetchRecipeList);
 </script>
 
 <template>
   <div class="edit-manager component-container">
-    <h2 class="main-title">Manage & Edit Movies</h2>
+    <h2 class="main-title">Manage & Edit Recipes</h2>
     
-    <ul v-if="!fetchingList" class="movie-grid">
-      <li v-for="movie in movieList" :key="movie.id" :class="['movie-card', { active: selectedId === movie.id }]" @click="selectMovie(movie)">
-        <div class="card-poster" v-if="movie.acf.poster" v-html="movie.acf.poster.simple_value_formatted"></div>
+    <ul v-if="!fetchingList" class="recipe-grid">
+      <li v-for="recipe in recipeList" :key="recipe.id" :class="['recipe-card', { active: selectedId === recipe.id }]" @click="selectRecipe(recipe)">
+        <div class="card-poster" v-if="recipe.acf.poster" v-html="recipe.acf.poster.simple_value_formatted"></div>
         <div class="card-content">
-          <strong>{{ movie.title.rendered }}</strong>
-          <span v-if="movie.acf.year">({{ movie.acf.year.simple_value_formatted }})</span>
+          <strong>{{ recipe.title.rendered }}</strong>
+          <span v-if="recipe.acf.time">({{ recipe.acf.time.simple_value_formatted }})</span>
         </div>
       </li>
     </ul>
 
     <section v-if="selectedId" class="edit-form-section">
       <div class="form-header">
-        <div v-if="movieData.acf.poster" v-html="movieData.acf.poster.simple_value_formatted" class="form-preview-html"></div>
-        <h3>Editing: {{ movieData.title }}</h3>
+        <div v-if="recipeData.acf.poster" v-html="recipeData.acf.poster.simple_value_formatted" class="form-preview-html"></div>
+        <h3>Editing: {{ recipeData.title }}</h3>
       </div>
       <form @submit.prevent="handleUpdate" class="wp-form">
-        <div class="form-group"><label>Title</label><input v-model="movieData.title" type="text" /></div>
-        <div class="form-group"><label>Synopsis</label><textarea v-model="movieData.acf.synopsis"></textarea></div>
-        <div class="form-group"><label>Year</label><input v-model="movieData.acf.year" type="number" /></div>
+        <div class="form-group"><label>Title</label><input v-model="recipeData.title" type="text" /></div>
+        <div class="form-group"><label>Description</label><textarea v-model="recipeData.acf.description"></textarea></div>
+        <div class="form-group"><label>Ingredients</label><textarea v-model="recipeData.acf.ingredients"></textarea></div>
+        <div class="form-group"><label>Instructions</label><textarea v-model="recipeData.acf.instructions"></textarea></div>
+        <div class="form-group"><label>Time</label><input v-model="recipeData.acf.time" type="text" /></div>
         <div class="form-actions">
           <button type="submit" class="primary-btn" :disabled="isUpdating">Save Update</button>
           <button type="button" @click="selectedId = null" class="secondary-btn">Close</button>
@@ -82,7 +84,7 @@ onMounted(fetchMovieList);
     <div v-if="showSuccessModal" class="modal-overlay">
       <div class="modal">
         <h3>✓ Success</h3>
-        <p>Movie updated on WordPress.</p>
+        <p>Recipe updated on WordPress.</p>
         <button @click="showSuccessModal = false" class="primary-btn">Dismiss</button>
       </div>
     </div>
@@ -92,9 +94,9 @@ onMounted(fetchMovieList);
 <style scoped>
 .component-container { max-width: 1100px; margin: 3rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; border: 1px solid #e1e8ed; font-family: 'Inter', sans-serif; }
 .main-title { font-size: 1.75rem; font-weight: 800; color: #1a202c; margin-bottom: 2rem; border-bottom: 2px solid #edf2f7; padding-bottom: 1rem; }
-.movie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem; list-style: none; padding: 0; margin-bottom: 3rem; }
-.movie-card { border: 1px solid #e1e8ed; border-radius: 12px; overflow: hidden; cursor: pointer; transition: 0.3s ease; }
-.movie-card.active { border-color: #3498db; background: #f0f7ff; box-shadow: 0 0 0 2px #3498db; }
+.recipe-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem; list-style: none; padding: 0; margin-bottom: 3rem; }
+.recipe-card { border: 1px solid #e1e8ed; border-radius: 12px; overflow: hidden; cursor: pointer; transition: 0.3s ease; }
+.recipe-card.active { border-color: #3498db; background: #f0f7ff; box-shadow: 0 0 0 2px #3498db; }
 .card-poster :deep(img) { width: 100%; height: 140px; object-fit: cover; }
 .card-content { padding: 12px; font-size: 0.9rem; }
 .edit-form-section { background: #f8fafc; padding: 2rem; border-radius: 12px; border: 1px solid #e1e8ed; }

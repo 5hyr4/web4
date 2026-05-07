@@ -1,7 +1,7 @@
 <script setup>
 // --- Configuration ---
-const auth = btoa('ngy_56fl8di6:zySp mrVk lPvR IFOx M8PZ tH5b'); // Use your App Password
-const baseUrl = 'https://ngy.582mi.com/headless/wp-json/wp/v2';
+const auth = btoa('h0Cg CzRI HhEb 8Gpl KQkY 4Fiv'); // Use your App Password
+const baseUrl = 'https://shyra70.582helvetica.com/cms/wp-json/wp/v2';
 
 import { reactive, ref } from 'vue';
 
@@ -10,10 +10,10 @@ const selectedFile = ref(null);
 const message = ref('');
 const statusClass = ref('');
 
-const movieData = reactive({
+const recipeData = reactive({
   title: '',
   status: 'publish',
-  acf: { synopsis: '', year: '', poster: null }
+  acf: { description: '', time: '', poster: null }
 });
 
 const handleFileChange = (e) => { selectedFile.value = e.target.files[0]; };
@@ -33,19 +33,19 @@ const uploadPoster = async () => {
 
 const handleFormSubmit = async () => {
   isSubmitting.value = true;
-  message.value = 'Uploading movie data...';
+  message.value = 'Uploading recipe data...';
   try {
     const posterId = await uploadPoster();
-    if (posterId) movieData.acf.poster = posterId;
-    const res = await fetch(`${baseUrl}/movies`, {
+    if (posterId) recipeData.acf.poster = posterId;
+    const res = await fetch(`${baseUrl}/recipes`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Basic ${auth}` },
-      body: JSON.stringify(movieData)
+      body: JSON.stringify(recipeData)
     });
     if (res.ok) {
-      message.value = "Movie added successfully!";
+      message.value = "Recipe added successfully!";
       statusClass.value = "success";
-      movieData.title = ''; movieData.acf.synopsis = ''; movieData.acf.year = '';
+      recipeData.title = ''; recipeData.acf.description = ''; recipeData.acf.time = '';
     }
   } catch (err) {
     message.value = "Failed to connect to WordPress.";
@@ -58,26 +58,34 @@ const handleFormSubmit = async () => {
 
 <template>
   <div class="component-container">
-    <h2 class="main-title">Add New Movie</h2>
+    <h2 class="main-title">Post New Recipe</h2>
     <form @submit.prevent="handleFormSubmit" class="wp-form">
       <section class="form-group">
-        <label>Movie Title</label>
-        <input v-model="movieData.title" type="text" placeholder="Inception" required />
+        <label>Recipe Title</label>
+        <input v-model="recipeData.title" type="text" placeholder="Recipe name" required />
       </section>
       <section class="form-group">
-        <label>Synopsis</label>
-        <textarea v-model="movieData.acf.synopsis" placeholder="Movie plot..."></textarea>
+        <label>Description</label>
+        <textarea v-model="recipeData.acf.description" placeholder="Recipe description..."></textarea>
+      </section>
+            <section class="form-group">
+        <label>Ingredients</label>
+        <textarea v-model="recipeData.acf.ingredients" placeholder="List of ingredients..."></textarea>
+      </section>
+        <section class="form-group">
+        <label>Instructions</label>
+        <textarea v-model="recipeData.acf.instructions" placeholder="Recipe instructions..."></textarea>
       </section>
       <section class="form-group">
-        <label>Release Year</label>
-        <input v-model="movieData.acf.year" type="number" placeholder="2010" />
+        <label>Time</label>
+        <input v-model="recipeData.acf.time" type="text" placeholder="30 minutes" />
       </section>
       <section class="form-group">
-        <label>Movie Poster</label>
+        <label>Recipe Poster</label>
         <input type="file" @change="handleFileChange" accept="image/*" />
       </section>
       <button type="submit" class="primary-btn" :disabled="isSubmitting">
-        {{ isSubmitting ? 'Processing...' : 'Add Movie' }}
+        {{ isSubmitting ? 'Processing...' : 'Post Recipe' }}
       </button>
     </form>
     <div v-if="message" :class="['status-bar', statusClass]">{{ message }}</div>

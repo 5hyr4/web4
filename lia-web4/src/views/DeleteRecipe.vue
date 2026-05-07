@@ -1,19 +1,19 @@
 <script setup>
 // --- Configuration ---
-const auth = btoa('ngy_56fl8di6:zySp mrVk lPvR IFOx M8PZ tH5b'); // Use your App Password
-const baseUrl = 'https://ngy.582mi.com/headless/wp-json/wp/v2';
+const auth = btoa('h0Cg CzRI HhEb 8Gpl KQkY 4Fiv'); // Use your App Password
+const baseUrl = 'https://shyra70.582helvetica.com/cms/wp-json/wp/v2';
 
 import { ref, onMounted } from 'vue';
 
-const movieList = ref([]);
+const recipeList = ref([]);
 const isFetching = ref(true);
 const isDeleting = ref(false);
 const itemToDelete = ref(null);
 
-const fetchMovies = async () => {
+const fetchRecipes = async () => {
   try {
-    const res = await fetch(`${baseUrl}/movies?per_page=50`, { headers: { 'Authorization': `Basic ${auth}` } });
-    movieList.value = await res.json();
+    const res = await fetch(`${baseUrl}/recipe?acf_format=standard`, { headers: { 'Authorization': `Basic ${auth}` } });
+    recipeList.value = await res.json();
   } finally { isFetching.value = false; }
 };
 
@@ -21,31 +21,31 @@ const confirmDeletion = async () => {
   if (!itemToDelete.value) return;
   isDeleting.value = true;
   try {
-    const res = await fetch(`${baseUrl}/movies/${itemToDelete.value.id}`, {
+    const res = await fetch(`${baseUrl}/recipes/${itemToDelete.value.id}`, {
       method: 'DELETE',
       headers: { 'Authorization': `Basic ${auth}` }
     });
     if (res.ok) {
-      movieList.value = movieList.value.filter(m => m.id !== itemToDelete.value.id);
+      recipeList.value = recipeList.value.filter(r => r.id !== itemToDelete.value.id);
       itemToDelete.value = null;
     }
   } finally { isDeleting.value = false; }
 };
 
-onMounted(fetchMovies);
+onMounted(fetchRecipes);
 </script>
 
 <template>
   <div class="component-container">
-    <h2 class="main-title">Movie Inventory</h2>
+    <h2 class="main-title">Recipe Inventory</h2>
     <div v-if="isFetching" class="status-msg">Syncing Library...</div>
     <div v-else class="delete-grid">
-      <div v-for="movie in movieList" :key="movie.id" class="delete-card">
-        <div class="movie-info">
-          <strong>{{ movie.title.rendered }}</strong>
-          <span v-if="movie.acf.year">{{ movie.acf.year.simple_value_formatted }}</span>
+      <div v-for="recipe in recipeList" :key="recipe.id" class="delete-card">
+        <div class="recipe-info">
+          <strong>{{ recipe.title.rendered }}</strong>
+          <span v-if="recipe.acf.time">{{ recipe.acf.time.simple_value_formatted }}</span>
         </div>
-        <button @click="itemToDelete = movie" class="danger-btn">Delete</button>
+        <button @click="itemToDelete = recipe" class="danger-btn">Delete</button>
       </div>
     </div>
 
@@ -67,9 +67,9 @@ onMounted(fetchMovies);
 .main-title { font-size: 1.75rem; font-weight: 800; color: #1a202c; margin-bottom: 2rem; border-bottom: 2px solid #edf2f7; padding-bottom: 1rem; }
 .delete-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
 .delete-card { padding: 1.5rem; border: 1px solid #e2e8f0; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
-.movie-info { display: flex; flex-direction: column; }
-.movie-info strong { color: #1e293b; font-size: 1.05rem; }
-.movie-info span { color: #64748b; font-size: 0.85rem; }
+.recipe-info { display: flex; flex-direction: column; }
+.recipe-info strong { color: #1e293b; font-size: 1.05rem; }
+.recipe-info span { color: #64748b; font-size: 0.85rem; }
 .danger-btn { background: #fee2e2; color: #b91c1c; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; }
 .danger-btn:hover { background: #ef4444; color: #fff; }
 .secondary-btn { padding: 12px; background: #f1f5f9; color: #475569; border: none; border-radius: 8px; cursor: pointer; flex: 1; }

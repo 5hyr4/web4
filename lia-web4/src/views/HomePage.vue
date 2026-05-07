@@ -1,27 +1,27 @@
 <script setup>
 // --- Configuration ---
-const auth = btoa('ngy_56fl8di6:zySp mrVk lPvR IFOx M8PZ tH5b'); // Use your App Password
-const baseUrl = 'https://ngy.582mi.com/headless/wp-json/wp/v2';
+const auth = btoa('h0Cg CzRI HhEb 8Gpl KQkY 4Fiv'); // Use your App Password
+const baseUrl = 'https://shyra70.582helvetica.com/cms/wp-json/wp/v2';
 
 import { ref, onMounted } from 'vue';
 
-const movies = ref([]);
+const recipes = ref([]);
 const isFetching = ref(true);
 const errorMessage = ref('');
 
 /**
- * Fetch all movies for the gallery
+ * Fetch all recipes for the gallery
  */
-const fetchMovies = async () => {
+const fetchRecipes = async () => {
   isFetching.value = true;
   try {
-    const res = await fetch(`${baseUrl}/movies?per_page=50&_fields=id,title,acf`, {
+    const res = await fetch(`${baseUrl}/recipe?acf_format=standard`, {
       headers: { 'Authorization': `Basic ${auth}` }
     });
     
-    if (!res.ok) throw new Error("Could not sync with movie library.");
+    if (!res.ok) throw new Error("Could not sync with recipe library.");
     
-    movies.value = await res.json();
+    recipes.value = await res.json();
   } catch (err) {
     errorMessage.value = err.message;
   } finally {
@@ -29,13 +29,13 @@ const fetchMovies = async () => {
   }
 };
 
-onMounted(fetchMovies);
+onMounted(fetchRecipes);
 </script>
 
 <template>
   <div class="component-container">
-    <header class="gallery-header">
-      <h2 class="main-title">Movie Gallery</h2>
+    <header class="recipe-header">
+      <h2 class="main-title">Recipe Gallery</h2>
       <p class="subtitle">Browse the complete collection of titles and synopses.</p>
     </header>
 
@@ -48,12 +48,12 @@ onMounted(fetchMovies);
       {{ errorMessage }}
     </div>
 
-    <div v-else class="movie-grid">
-      <div v-for="movie in movies" :key="movie.id" class="movie-card">
+    <div v-else class="recipe-grid">
+      <div v-for="recipe in recipes" :key="recipe.id" class="recipe-card">
         <div class="poster-frame">
           <div 
-            v-if="movie.acf.poster" 
-            v-html="movie.acf.poster.simple_value_formatted" 
+            v-if="recipe.acf.poster" 
+            v-html="recipe.acf.poster.simple_value_formatted" 
             class="poster-html"
           ></div>
           <div v-else class="poster-placeholder">
@@ -61,13 +61,13 @@ onMounted(fetchMovies);
           </div>
         </div>
 
-        <div class="movie-meta">
-          <h3 class="movie-title">{{ movie.title.rendered }}</h3>
-          <span class="movie-year" v-if="movie.acf.year">
-            {{ movie.acf.year.simple_value_formatted }}
+        <div class="recipe-meta">
+          <h3 class="recipe-title">{{ recipe.title.rendered }}</h3>
+          <span class="recipe-time" v-if="recipe.acf.year">
+            {{ recipe.acf.year.simple_value_formatted }}
           </span>
-          <p class="movie-synopsis" v-if="movie.acf.synopsis">
-            {{ movie.acf.synopsis.simple_value_formatted }}
+          <p class="recipe-description" v-if="recipe.acf.description">
+            {{ recipe.acf.description.simple_value_formatted }}
           </p>
         </div>
       </div>
@@ -101,13 +101,13 @@ onMounted(fetchMovies);
 .subtitle { color: #718096; font-size: 1rem; }
 
 /* Grid Layout */
-.movie-grid { 
+.recipe-grid { 
   display: grid; 
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
   gap: 2rem; 
 }
 
-.movie-card { 
+.recipe-card { 
   background: #fff; 
   border-radius: 12px; 
   border: 1px solid #e2e8f0; 
@@ -115,7 +115,7 @@ onMounted(fetchMovies);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.movie-card:hover { 
+.recipe-card:hover { 
   transform: translateY(-8px); 
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
@@ -146,16 +146,16 @@ onMounted(fetchMovies);
 }
 
 /* Meta Styling */
-.movie-meta { padding: 1.5rem; }
+.recipe-meta { padding: 1.5rem; }
 
-.movie-title { 
+.recipe-title { 
   font-size: 1.25rem; 
   font-weight: 700; 
   color: #1e293b; 
   margin-bottom: 0.25rem; 
 }
 
-.movie-year { 
+.recipe-time { 
   display: inline-block; 
   font-size: 0.85rem; 
   font-weight: 600; 
@@ -166,13 +166,12 @@ onMounted(fetchMovies);
   margin-bottom: 1rem;
 }
 
-.movie-synopsis { 
+.recipe-description { 
   color: #475569; 
   font-size: 0.9rem; 
   line-height: 1.6; 
   display: -webkit-box;
-  -webkit-line-clamp: 4;
-  line-clamp: 4;
+  /* -webkit-line-clamp: 4; */
   -webkit-box-orient: vertical;  
   overflow: hidden;
 }
