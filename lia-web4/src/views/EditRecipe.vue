@@ -1,6 +1,5 @@
 <script setup>
-// --- Configuration ---
-const auth = btoa('h0Cg CzRI HhEb 8Gpl KQkY 4Fiv'); // Use your App Password
+const auth = btoa('h0Cg CzRI HhEb 8Gpl KQkY 4Fiv'); 
 const baseUrl = 'https://shyra70.582helvetica.com/cms/wp-json/wp/v2';
 
 import { ref, reactive, onMounted } from 'vue';
@@ -18,7 +17,7 @@ const recipeData = reactive({
 
 const fetchRecipeList = async () => {
   try {
-    const res = await fetch(`${baseUrl}/recipe?acf_format=standard`, { headers: { 'Authorization': `Basic ${auth}` } });
+    const res = await fetch(`${baseUrl}/recipe`, { headers: { 'Authorization': `Basic ${auth}` } });
     recipeList.value = await res.json();
   } finally { fetchingList.value = false; }
 };
@@ -36,7 +35,7 @@ const selectRecipe = (recipe) => {
 const handleUpdate = async () => {
   isUpdating.value = true;
   try {
-    const res = await fetch(`${baseUrl}/recipes/${selectedId.value}`, {
+    const res = await fetch(`${baseUrl}/recipe/${selectedId.value}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Basic ${auth}` },
       body: JSON.stringify({
@@ -113,4 +112,4 @@ input, textarea { padding: 12px; border: 2px solid #edf2f7; border-radius: 8px; 
 .secondary-btn { flex: 1; padding: 14px; background: #edf2f7; color: #4a5568; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; }
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 1000; }
 .modal { background: #fff; padding: 2.5rem; border-radius: 16px; text-align: center; width: 320px; }
-</style>
+</style>  

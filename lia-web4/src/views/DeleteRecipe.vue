@@ -1,6 +1,5 @@
 <script setup>
-// --- Configuration ---
-const auth = btoa('h0Cg CzRI HhEb 8Gpl KQkY 4Fiv'); // Use your App Password
+const auth = btoa('h0Cg CzRI HhEb 8Gpl KQkY 4Fiv');
 const baseUrl = 'https://shyra70.582helvetica.com/cms/wp-json/wp/v2';
 
 import { ref, onMounted } from 'vue';
@@ -21,7 +20,7 @@ const confirmDeletion = async () => {
   if (!itemToDelete.value) return;
   isDeleting.value = true;
   try {
-    const res = await fetch(`${baseUrl}/recipes/${itemToDelete.value.id}`, {
+    const res = await fetch(`${baseUrl}/recipe/${itemToDelete.value.id}`, {
       method: 'DELETE',
       headers: { 'Authorization': `Basic ${auth}` }
     });
