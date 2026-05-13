@@ -1,5 +1,5 @@
 <script setup>
-const auth = btoa('h0Cg CzRI HhEb 8Gpl KQkY 4Fiv'); 
+const auth = btoa('shyra70:h0CgCzRIHhEb8GplKQkY4Fiv'); 
 const baseUrl = 'https://shyra70.582helvetica.com/cms/wp-json/wp/v2';
 
 import { ref, reactive, onMounted } from 'vue';
@@ -12,12 +12,12 @@ const showSuccessModal = ref(false);
 
 const recipeData = reactive({
   title: '',
-  acf: { description: '', ingredients: '', instructions: '', time: '', poster: null }
+  acf: { description: '', ingredients: '', instructions: '', time: '', image: null }
 });
 
 const fetchRecipeList = async () => {
   try {
-    const res = await fetch(`${baseUrl}/recipe`, { headers: { 'Authorization': `Basic ${auth}` } });
+    const res = await fetch(`${baseUrl}/recipe?acf_format=standard`, { headers: { 'Authorization': `Basic ${auth}` } });
     recipeList.value = await res.json();
   } finally { fetchingList.value = false; }
 };
@@ -25,11 +25,11 @@ const fetchRecipeList = async () => {
 const selectRecipe = (recipe) => {
   selectedId.value = recipe.id;
   recipeData.title = recipe.title.rendered;
-  recipeData.acf.description = recipe.acf.description?.simple_value_formatted || '';
-  recipeData.acf.ingredients = recipe.acf.ingredients?.simple_value_formatted || '';
-  recipeData.acf.instructions = recipe.acf.instructions?.simple_value_formatted || '';
-  recipeData.acf.time = recipe.acf.time?.simple_value_formatted || '';
-  recipeData.acf.poster = recipe.acf.poster || null;
+  recipeData.acf.description = recipe.acf.description || '';
+  recipeData.acf.ingredients = recipe.acf.ingredients || '';
+  recipeData.acf.instructions = recipe.acf.instructions || '';
+  recipeData.acf.time = recipe.acf.time || '';
+  recipeData.acf.image = recipe.acf.image || null;
 };
 
 const handleUpdate = async () => {
@@ -40,9 +40,12 @@ const handleUpdate = async () => {
       headers: { 'Content-Type': 'application/json', 'Authorization': `Basic ${auth}` },
       body: JSON.stringify({
         title: recipeData.title,
-        acf: { description: recipeData.acf.description, ingredients: recipeData.acf.ingredients, instructions: recipeData.acf.instructions, time: recipeData.acf.time }
+        acf: { description: recipeData.acf.description, ingredients: recipeData.acf.ingredients, instructions: recipeData.acf.instructions, time: recipeData.acf.time, image: recipeData.acf.image?.id || null
+        }
       })
     });
+    const data = await res.json();
+    console.log(data);
     if (res.ok) { showSuccessModal.value = true; await fetchRecipeList(); }
   } finally { isUpdating.value = false; }
 };
@@ -56,17 +59,20 @@ onMounted(fetchRecipeList);
     
     <ul v-if="!fetchingList" class="recipe-grid">
       <li v-for="recipe in recipeList" :key="recipe.id" :class="['recipe-card', { active: selectedId === recipe.id }]" @click="selectRecipe(recipe)">
-        <div class="card-poster" v-if="recipe.acf.poster" v-html="recipe.acf.poster.simple_value_formatted"></div>
-        <div class="card-content">
+        <div class="card-poster" v-if="recipe.acf?.image?.url">
+          <img :src="recipe.acf.image.url" alt=""></div>        
+          <div class="card-content">
           <strong>{{ recipe.title.rendered }}</strong>
-          <span v-if="recipe.acf.time">({{ recipe.acf.time.simple_value_formatted }})</span>
+          <span v-if="recipe.acf.time">({{ recipe.acf.time }})</span>
         </div>
       </li>
     </ul>
 
     <section v-if="selectedId" class="edit-form-section">
       <div class="form-header">
-        <div v-if="recipeData.acf.poster" v-html="recipeData.acf.poster.simple_value_formatted" class="form-preview-html"></div>
+        <div
+          v-if="recipeData.acf?.image?.url"
+          class="form-preview-html"><img :src="recipeData.acf.image.url" alt=""></div>        
         <h3>Editing: {{ recipeData.title }}</h3>
       </div>
       <form @submit.prevent="handleUpdate" class="wp-form">
@@ -98,11 +104,11 @@ onMounted(fetchRecipeList);
 .recipe-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem; list-style: none; padding: 0; margin-bottom: 3rem; }
 .recipe-card { border: 1px solid #e1e8ed; border-radius: 12px; overflow: hidden; cursor: pointer; transition: 0.3s ease; }
 .recipe-card.active { border-color: #3498db; background: #f0f7ff; box-shadow: 0 0 0 2px #3498db; }
-.card-poster :deep(img) { width: 100%; height: 140px; object-fit: cover; }
+.card-poster img { width: 100%; height: 140px; object-fit: cover; }
 .card-content { padding: 12px; font-size: 0.9rem; }
 .edit-form-section { background: #f8fafc; padding: 2rem; border-radius: 12px; border: 1px solid #e1e8ed; }
 .form-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; }
-.form-preview-html :deep(img) { width: 70px; height: 100px; object-fit: cover; border-radius: 6px; }
+.form-preview-html img{ width: 70px; height: 100px; object-fit: cover; border-radius: 6px; }
 .wp-form { display: flex; flex-direction: column; gap: 1.5rem; }
 .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
 label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: #4a5568; }

@@ -1,5 +1,5 @@
 <script setup>
-const auth = btoa('h0Cg CzRI HhEb 8Gpl KQkY 4Fiv'); 
+const auth = btoa('shyra70:h0CgCzRIHhEb8GplKQkY4Fiv'); 
 const baseUrl = 'https://shyra70.582helvetica.com/cms/wp-json/wp/v2';
 
 import { reactive, ref } from 'vue';
@@ -12,7 +12,7 @@ const statusClass = ref('');
 const recipeData = reactive({
   title: '',
   status: 'publish',
-  acf: { description: '', time: '', poster: null }
+  acf: { description: '', ingredients: '', instructions: '', time: '', image: null }
 });
 
 const handleFileChange = (e) => { selectedFile.value = e.target.files[0]; };
@@ -34,9 +34,9 @@ const handleFormSubmit = async () => {
   isSubmitting.value = true;
   message.value = 'Uploading recipe data...';
   try {
-    const posterId = await uploadPoster();
-    if (posterId) recipeData.acf.poster = posterId;
-    const res = await fetch(`${baseUrl}/recipes`, {
+    const imageId = await uploadPoster();
+    if (imageId) recipeData.acf.image = imageId;
+    const res = await fetch(`${baseUrl}/recipe`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Basic ${auth}` },
       body: JSON.stringify(recipeData)
@@ -44,7 +44,7 @@ const handleFormSubmit = async () => {
     if (res.ok) {
       message.value = "Recipe added successfully!";
       statusClass.value = "success";
-      recipeData.title = ''; recipeData.acf.description = ''; recipeData.acf.ingredients = ''; recipeData.acf.instructions = ''; recipeData.acf.time = '';
+      recipeData.title = ''; recipeData.acf.description = ''; recipeData.acf.ingredients = ''; recipeData.acf.instructions = ''; recipeData.acf.time = ''; recipeData.acf.image = null;
     }
   } catch (err) {
     message.value = "Failed to connect to WordPress.";

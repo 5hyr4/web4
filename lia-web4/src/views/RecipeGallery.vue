@@ -1,5 +1,5 @@
 <script setup>
-const auth = btoa('h0Cg CzRI HhEb 8Gpl KQkY 4Fiv');
+const auth = btoa('shyra70:h0Cg CzRI HhEb 8Gpl KQkY 4Fiv');
 const baseUrl = 'https://shyra70.582helvetica.com/cms/wp-json/wp/v2';
 
 import { ref, onMounted } from 'vue';
