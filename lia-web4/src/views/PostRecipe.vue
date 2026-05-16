@@ -92,14 +92,14 @@ const handleFormSubmit = async () => {
 </template>
 
 <style scoped>
-.component-container { max-width: 650px; margin: 3rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; border: 1px solid #e1e8ed; box-shadow: 0 10px 25px rgba(0,0,0,0.05); font-family: 'Inter', sans-serif; }
-.main-title { font-size: 1.75rem; font-weight: 800; color: #1a202c; margin-bottom: 2rem; border-bottom: 2px solid #edf2f7; padding-bottom: 1rem; }
+.component-container { max-width: 650px; margin: 3rem auto; padding: 2.5rem; background: #fffdf9; border-radius: 16px; border: 1px solid #3662528d; box-shadow: 0 10px 25px rgba(0,0,0,0.05); font-family: 'Inter', sans-serif; }
+.main-title { font-size: 1.75rem; font-weight: 800; color: #366252; margin-bottom: 2rem; border-bottom: 2px solid #edf2f7; padding-bottom: 1rem; }
 .wp-form { display: flex; flex-direction: column; gap: 1.5rem; }
 .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
 label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: #4a5568; letter-spacing: 0.05em; }
 input, textarea { padding: 12px 16px; border: 2px solid #edf2f7; border-radius: 10px; background: #f8fafc; font-size: 1rem; transition: all 0.2s; }
 input:focus, textarea:focus { outline: none; border-color: #3498db; background: #fff; }
-.primary-btn { padding: 16px; background: #3498db; color: #fff; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; transition: background 0.2s; }
+.primary-btn { padding: 16px; background: #366252; color: #fff; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; transition: background 0.2s; }
 .primary-btn:disabled { background: #cbd5e0; }
 .status-bar { margin-top: 1.5rem; padding: 1rem; border-radius: 10px; text-align: center; font-weight: 600; }
 .success { background: #c6f6d5; color: #22543d; }

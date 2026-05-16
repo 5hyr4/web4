@@ -62,8 +62,8 @@ onMounted(fetchRecipes);
 </template>
 
 <style scoped>
-.component-container { max-width: 900px; margin: 3rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; border: 1px solid #e1e8ed; font-family: 'Inter', sans-serif; }
-.main-title { font-size: 1.75rem; font-weight: 800; color: #1a202c; margin-bottom: 2rem; border-bottom: 2px solid #edf2f7; padding-bottom: 1rem; }
+.component-container { max-width: 900px; margin: 3rem auto; padding: 2.5rem; background: #fffdf9; border-radius: 16px; border: 1px solid #3662528d; font-family: 'Inter', sans-serif; }
+.main-title { font-size: 1.75rem; font-weight: 800; color: #366252; margin-bottom: 2rem; border-bottom: 2px solid #edf2f7; padding-bottom: 1rem; }
 .delete-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
 .delete-card { padding: 1.5rem; border: 1px solid #e2e8f0; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
 .recipe-info { display: flex; flex-direction: column; }

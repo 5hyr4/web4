@@ -99,8 +99,8 @@ onMounted(fetchRecipeList);
 </template>
 
 <style scoped>
-.component-container { max-width: 1100px; margin: 3rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; border: 1px solid #e1e8ed; font-family: 'Inter', sans-serif; }
-.main-title { font-size: 1.75rem; font-weight: 800; color: #1a202c; margin-bottom: 2rem; border-bottom: 2px solid #edf2f7; padding-bottom: 1rem; }
+.component-container { max-width: 1100px; margin: 3rem auto; padding: 2.5rem; background: #fffdf9; border-radius: 16px; border: 1px solid #3662528d; font-family: 'Inter', sans-serif; }
+.main-title { font-size: 1.75rem; font-weight: 800; color: #366252; margin-bottom: 2rem; border-bottom: 2px solid #edf2f7; padding-bottom: 1rem; }
 .recipe-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem; list-style: none; padding: 0; margin-bottom: 3rem; }
 .recipe-card { border: 1px solid #e1e8ed; border-radius: 12px; overflow: hidden; cursor: pointer; transition: 0.3s ease; }
 .recipe-card.active { border-color: #3498db; background: #f0f7ff; box-shadow: 0 0 0 2px #3498db; }
