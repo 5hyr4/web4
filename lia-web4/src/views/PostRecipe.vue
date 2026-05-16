@@ -44,7 +44,7 @@ const handleFormSubmit = async () => {
     if (res.ok) {
       message.value = "Recipe added successfully!";
       statusClass.value = "success";
-      recipeData.title = ''; recipeData.acf.description = ''; recipeData.acf.ingredients = ''; recipeData.acf.instructions = ''; recipeData.acf.time = ''; recipeData.acf.image = null;
+      recipeData.title = ''; recipeData.acf.description = ''; recipeData.acf.ingredients = ''; recipeData.acf.instructions = ''; recipeData.acf.time = ''; recipeData.acf.image = null; selectedFile.value = null;
     }
   } catch (err) {
     message.value = "Failed to connect to WordPress.";
